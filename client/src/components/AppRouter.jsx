@@ -8,13 +8,9 @@ import { bindActionCreators } from 'redux'
 
 import { getUserData } from '../actions'
 import LegoLoading from '../components/Loading/LegoLoading'
+import Main from './Main/Main'
+import Header from './Main/Header'
 const Login = lazy(() => import('./Login/Login'))
-
-function Comp() {
-  return (
-    <div>hello</div>
-  )
-}
 
 function AppRouter(props) {
 
@@ -22,7 +18,7 @@ function AppRouter(props) {
     if (!props.isLoggedIn) {
       props.getUserData()
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
@@ -33,9 +29,10 @@ function AppRouter(props) {
   return (
     <Router>
       <Suspense fallback={<LegoLoading open={true} />}>
+        <Header />
         <Route exact path='/' render={() => (isLoggedIn ? <Redirect to={`/main`} /> : <Redirect to={`/login`} />)} />
         <Route exact path='/login' component={Login} />
-        <PrivateRoute path='/main' isLoggedIn={isLoggedIn} component={Comp} />
+        <PrivateRoute path='/main' isLoggedIn={isLoggedIn} component={Main} />
         <LegoLoading open={isLoading} />
       </Suspense>
     </Router>

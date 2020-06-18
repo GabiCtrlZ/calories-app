@@ -20,7 +20,6 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import { Redirect } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import { connect } from 'react-redux'
-import Toggle from '../Toggle'
 import { bindActionCreators } from 'redux'
 
 import { login, resetLoginError } from '../../actions'
@@ -71,7 +70,6 @@ function Login(props) {
   if (isLoggedIn) return <Redirect to={from} />
   return (
     <div>
-      <Toggle />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
