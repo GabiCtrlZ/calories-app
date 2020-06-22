@@ -12,10 +12,21 @@ const generalTypes = {
   CHANGE_LIGHT: 'CHANGE_LIGHT',
 }
 
+const caloriesTypes = {
+  SET_CALORIES: 'SET_CALORIES',
+}
+
+const favTypes = {
+  ADD_FAV: 'ADD_FAV',
+  REMOVE_FAV: 'REMOVE_FAV',
+}
+
 const API = 'api'
 
 export {
   API,
   uiTypes,
   generalTypes,
+  caloriesTypes,
+  favTypes,
 }

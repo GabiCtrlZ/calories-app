@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux'
 import { getUserData } from '../actions'
 import LegoLoading from '../components/Loading/LegoLoading'
 import Main from './Main/Main'
-import Header from './Main/Header'
+import Header from './Header'
 const Login = lazy(() => import('./Login/Login'))
 
 function AppRouter(props) {

@@ -3,7 +3,7 @@ import { generalTypes as types } from '../actions/types'
 
 const initialState = Immutable({
   isLoading: false,
-  isLight: false,
+  isLight: true,
 })
 
 export default function uiReducer(state = initialState, { type, payload }) {

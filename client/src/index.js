@@ -3,18 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {
-  enable as enableDarkMode,
-} from 'darkreader'
+// import {
+//   enable as enableDarkMode,
+// } from 'darkreader'
 
 import { Provider } from 'react-redux'
 import store from './store'
 
-enableDarkMode({
-  brightness: 100,
-  contrast: 90,
-  sepia: 10,
-})
+// Not the best solution but ¯\_(ツ)_/¯ 
+document.body.style = 'background: rgb(239, 239, 245);'
+
+// To enable default dark mode uncomment this section
+// enableDarkMode({
+//   brightness: 100,
+//   contrast: 90,
+//   sepia: 10,
+// })
 
 ReactDOM.render(<Provider store={store} ><App /></Provider>, document.getElementById('root'));
 

@@ -1,11 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Button, AppBar, Toolbar } from '@material-ui/core'
+import { IconButton, AppBar, Toolbar } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import { bindActionCreators } from 'redux'
 
-import { failedLogin2 as logout } from '../../actions'
-import Toggle from '../Toggle'
+import { failedLogin2 as logout } from '../actions'
+import Toggle from './Toggle'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -17,6 +18,9 @@ const useStyles = makeStyles(() => ({
   toggle: {
     flexGrow: 1,
   },
+  logoutIcon: {
+    color: 'white',
+  }
 }))
 
 function Main(props) {
@@ -30,7 +34,7 @@ function Main(props) {
           <div className={classes.toggle} >
             <Toggle />
           </div>
-          {isLoggedIn && <Button onClick={userLogout} style={{ color: 'white' }} >Logout</Button>}
+          {isLoggedIn && <IconButton onClick={userLogout} className={classes.logoutIcon} ><ExitToAppIcon /></IconButton>}
         </Toolbar>
       </AppBar>
     </div>

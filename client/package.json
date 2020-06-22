@@ -16,6 +16,7 @@
     "date-fns": "^2.11.0",
     "history": "^5.0.0",
     "notistack": "^0.9.9",
+    "rc-progress": "^3.0.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-fade-in": "^0.1.8",
