@@ -20,7 +20,7 @@ const init = async (errorHandler = null, bufferCommands = false) => {
       }
     })
 
-    await mongoose.connect(process.env.MONGOLAB_YELLOW_URI || MONGO_URI, MONGO_OPTIONS)
+    await mongoose.connect(process.env.MONGODB_URI || MONGO_URI, MONGO_OPTIONS)
 
     console.log('connected successfully to the mongodb database')
     return mongoose
