@@ -2,9 +2,11 @@
 
 A simple app for keeping track of macro nutrition.
 
-![alt text](https://raw.githubusercontent.com/GabiCtrlZ/calories-app/master/pictures/main_screen.jpeg){: width=250 height=100 }
+<img src="https://raw.githubusercontent.com/GabiCtrlZ/calories-app/master/pictures/main_screen.jpeg" alt="Kitten"
+	width="200" height="450" />
 
-![alt text](https://raw.githubusercontent.com/GabiCtrlZ/calories-app/master/pictures/favorites-screen.jpeg =250x100)
+<img src="https://raw.githubusercontent.com/GabiCtrlZ/calories-app/master/pictures/favorites-screen.jpeg" alt="Kitten"
+	width="200" height="450" />
 
 ## Configuration
 
