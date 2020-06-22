@@ -1,6 +1,6 @@
-# Login Boilerplate
+# Calories counter
 
-A simple front and back project ready to clone, got a login system with users.
+A simple app for keeping track of macro nutrition.
 
 ## Configuration
 
