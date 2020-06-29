@@ -28,6 +28,11 @@ module.exports = async (req, res) => {
     Joi.assert(body, favoriteSchema)
 
     const log = await Logs.findOne({ user: userId }).sort('-created_at')
+    if (!log) {
+      return res.json({
+        success: true,
+      })
+    }
 
     await new Meals({
       ...body,
@@ -36,7 +41,6 @@ module.exports = async (req, res) => {
 
     res.json({
       success: true,
-      data: ['empty'],
     })
   } catch (e) {
     logger.info('request to create a favorite has failed')
