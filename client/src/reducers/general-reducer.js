@@ -1,5 +1,5 @@
 import Immutable from 'seamless-immutable'
-import { generalTypes as types } from '../actions/types'
+import { generalTypes as types, uiTypes } from '../actions/types'
 
 const initialState = Immutable({
   isLoading: false,
@@ -22,6 +22,11 @@ export default function uiReducer(state = initialState, { type, payload }) {
       return {
         ...state,
         isLight: !state.isLight,
+      }
+    case uiTypes.SUCCESS_LOGIN:
+      return {
+        ...state,
+        isLight: payload.data.isLight,
       }
     default:
       return state

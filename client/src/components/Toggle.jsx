@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -42,19 +42,20 @@ const ToggleContainer = styled.button`
 function Toggle(props) {
   const { isLight, setIsLight } = props
 
-  const toggleTheme = () => {
-    if (isLight) {
+  useEffect(() => {
+    if (!isLight) {
       enableDarkMode({
         brightness: 100,
         contrast: 90,
         sepia: 10,
       })
-      setIsLight(false)
     } else {
       disableDarkMode()
-      setIsLight(true)
-
     }
+  }, [isLight])
+
+  const toggleTheme = () => {
+    setIsLight(!isLight)
   }
   return (
     <ToggleContainer lightTheme={isLight} onClick={toggleTheme}>
