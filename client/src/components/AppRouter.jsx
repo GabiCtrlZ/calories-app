@@ -10,6 +10,8 @@ import { getUserData } from '../actions'
 import LegoLoading from '../components/Loading/LegoLoading'
 import Main from './Main/Main'
 import Header from './Header'
+import Logs from './Logs/Logs'
+import Log from './Logs/Log'
 const Login = lazy(() => import('./Login/Login'))
 
 function AppRouter(props) {
@@ -33,6 +35,8 @@ function AppRouter(props) {
         <Route exact path='/' render={() => (isLoggedIn ? <Redirect to={`/main`} /> : <Redirect to={`/login`} />)} />
         <Route exact path='/login' component={Login} />
         <PrivateRoute path='/main' isLoggedIn={isLoggedIn} component={Main} />
+        <PrivateRoute exact path='/logs' isLoggedIn={isLoggedIn} component={Logs} />
+        <PrivateRoute path='/logs/:id' isLoggedIn={isLoggedIn} component={Log} />
         <LegoLoading open={isLoading} />
       </Suspense>
     </Router>

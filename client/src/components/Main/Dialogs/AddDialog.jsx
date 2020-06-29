@@ -8,21 +8,23 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { setCalories } from '../../../actions'
+import { setCalories, addMeal } from '../../../actions'
 import DialogTextField from './DialogTextField'
 
 
 function AddDialog(props) {
-  const { open, handleClose, initialValue, calories, handleSetCalories } = props
+  const { open, handleClose, initialValue, calories, handleSetCalories, handleAddMeal } = props
   const [protein, setProtein] = useState('')
   const [fat, setFat] = useState('')
   const [carbs, setCarbs] = useState('')
   const [weight, setWeight] = useState('')
+  const [name, setName] = useState('')
 
   useEffect(() => {
     setFat(initialValue.fat || '')
     setProtein(initialValue.protein || '')
     setCarbs(initialValue.carbs || '')
+    setName(initialValue.name || '')
     setWeight('')
   }, [open])
 
@@ -31,6 +33,12 @@ function AddDialog(props) {
       protein: (protein * (weight / 100)) + calories.protein,
       carbs: (carbs * (weight / 100)) + calories.carbs,
       fat: (fat * (weight / 100)) + calories.fat,
+    })
+    handleAddMeal({
+      protein: (protein * (weight / 100)),
+      carbs: (carbs * (weight / 100)),
+      fat: (fat * (weight / 100)),
+      name: name || 'No name',
     })
     handleClose()
   }
@@ -43,6 +51,8 @@ function AddDialog(props) {
           <DialogContentText>
             Here you are able to add your current meal calorie intake. simply enter the values for a 100 (g) and then enter the weight you ate
           </DialogContentText>
+          {/* NAME */}
+          <DialogTextField name="Name" description="Meal Name" setter={setName} value={name} allowString="true" />
           {/* CARBS */}
           <DialogTextField name="Carbs" description="Carbs for 100 (g)" setter={setCarbs} value={carbs} />
           {/* PROTEIN */}
@@ -72,6 +82,7 @@ const mapStateToProps = ({ calories }) => ({
 
 const mapActionsToProps = dispatch => ({
   handleSetCalories: bindActionCreators(setCalories, dispatch),
+  handleAddMeal: bindActionCreators(addMeal, dispatch),
 })
 
 export default (connect(

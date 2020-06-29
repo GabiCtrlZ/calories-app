@@ -21,6 +21,15 @@ const favTypes = {
   REMOVE_FAV: 'REMOVE_FAV',
 }
 
+const logsTypes = {
+  ADD_LOG: 'ADD_LOG',
+  REMOVE_LOG: 'REMOVE_LOG',
+}
+
+const mealsTypes = {
+  GET_MEALS: 'GET_MEALS',
+}
+
 const API = 'api'
 
 export {
@@ -29,4 +38,6 @@ export {
   generalTypes,
   caloriesTypes,
   favTypes,
+  logsTypes,
+  mealsTypes,
 }

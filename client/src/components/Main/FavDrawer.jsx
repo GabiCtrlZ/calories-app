@@ -51,7 +51,7 @@ function DrawerItem(props) {
   const { name, protein, carbs, fat, _id } = item
 
   const openDialog = () => {
-    setAddDialogInitialValue({ protein, fat, carbs })
+    setAddDialogInitialValue({ protein, fat, carbs, name })
     toggleDialog()
   }
 

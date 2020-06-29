@@ -7,6 +7,7 @@ import EditIcon from '@material-ui/icons/Edit'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import { Line } from 'rc-progress'
+
 import { setCalories } from '../../actions'
 import { bindActionCreators } from 'redux'
 
