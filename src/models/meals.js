@@ -11,6 +11,11 @@ const mealsSchema = new Schema({
     type: String,
     ref: 'logs',
   },
+  expireAt: {
+    type: Date,
+    default: Date.now,
+    index: { expires: '7 days' },
+  },
 })
 
 

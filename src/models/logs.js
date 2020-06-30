@@ -8,6 +8,11 @@ const logsSchema = new Schema({
     type: String,
     ref: 'user',
   },
+  expireAt: {
+    type: Date,
+    default: Date.now,
+    index: { expires: '7 days' },
+  },
 })
 
 
