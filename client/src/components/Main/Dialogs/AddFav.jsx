@@ -28,10 +28,10 @@ function AddDialog(props) {
 
   const addFav = () => {
     handleAddFav({
-      name,
-      protein,
-      carbs,
-      fat,
+      name: name || 'No Name',
+      protein: protein || 0,
+      carbs: carbs || 0,
+      fat: fat || 0,
     })
     handleClose()
   }
