@@ -28,6 +28,7 @@ const logsTypes = {
 
 const mealsTypes = {
   GET_MEALS: 'GET_MEALS',
+  REMOVE_MEAL: 'REMOVE_MEAL',
 }
 
 const API = 'api'
