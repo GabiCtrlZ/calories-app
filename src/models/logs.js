@@ -13,7 +13,7 @@ const logsSchema = new Schema({
     default: Date.now,
     index: { expires: '7 days' },
   },
-})
+}, { timestamps: true })
 
 
 module.exports = mongo.model('logs', logsSchema)

@@ -16,7 +16,7 @@ const mealsSchema = new Schema({
     default: Date.now,
     index: { expires: '7 days' },
   },
-})
+}, { timestamps: true })
 
 
 module.exports = mongo.model('meals', mealsSchema)

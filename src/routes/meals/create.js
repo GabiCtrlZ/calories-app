@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
 
     Joi.assert(body, favoriteSchema)
 
-    const log = await Logs.findOne({ user: userId }).sort('-date')
+    const log = await Logs.findOne({ user: userId }).sort('-createdAt')
     if (!log) {
       return res.json({
         success: true,
