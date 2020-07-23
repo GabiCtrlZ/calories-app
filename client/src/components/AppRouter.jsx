@@ -18,7 +18,8 @@ import Register from './Register/Register'
 const Login = lazy(() => import('./Login/Login'))
 
 function AppRouter(props) {
-  const calcWindowCompatibility = () => window.innerHeight < 636 || window.innerWidth > window.innerHeight
+  // const calcWindowCompatibility = () => window.innerHeight < 636 || window.innerWidth > window.innerHeight
+  const calcWindowCompatibility = () => false
   const [isWindowIncompatible, setisWindowIncompatible] = useState(calcWindowCompatibility())
   const [windowHeight, setWindowHeight] = useState(window.innerHeight)
 
