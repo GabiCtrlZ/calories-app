@@ -10,10 +10,13 @@ axios.defaults.withCredentials = true
 
 axios.interceptors.response.use(response => response, (error) => {
   if (error.response && (error.response.status === 401 || error.response.status === 400)) {
-    if (window.location.pathname !== '/login') {
-      return Promise.reject(401)
-    } else {
+    if (window.location.pathname === '/login' || window.location.pathname === '/register') {
+      if (window.location.pathname === '/register' && error.response.status === 400) {
+        return Promise.reject('register')
+      }
       return Promise.reject('login')
+    } else {
+      return Promise.reject(401)
     }
   }
 })
@@ -24,15 +27,15 @@ const errorSnackbarActions = key => (
   </Button>
 )
 
-const playErrorSnackbar = () => {
-  playSnackbar('Something went wrong.', {
+export const playErrorSnackbar = (costumMessage) => {
+  playSnackbar(costumMessage || 'Something went wrong.', {
     variant: 'error',
     autoHideDuration: 7000,
     action: errorSnackbarActions,
   })
 }
 
-const playSuccessSnackbar = (successSnackbar) => {
+export const playSuccessSnackbar = (successSnackbar) => {
   playSnackbar(successSnackbar, {
     variant: 'success',
     autoHideDuration: 3000,
@@ -43,11 +46,11 @@ const playSuccessSnackbar = (successSnackbar) => {
 const middleware = ({ dispatch }) => next => action => {
   if (action.type !== API) return next(action)
 
-  const { url, success, error, method = 'GET', data, noDispatchSuccess, flowData, dispatchError, flowMe, withLoading, successSnackbar } = action.payload
+  const { url, success, error, method = 'GET', data, noDispatchSuccess, flowData, dispatchError, flowMe, withLoading, successSnackbar, costumMessage, costumMessage2 } = action.payload
 
   const baseUrl = REACT_APP_BASE_URL
 
-  if (withLoading) { 
+  if (withLoading) {
     dispatch(setLoadingTrue())
   }
 
@@ -75,10 +78,10 @@ const middleware = ({ dispatch }) => next => action => {
       else if (error) {
         error()
       }
-      if (withLoading) { 
+      if (withLoading) {
         dispatch(setLoadingFalse())
       }
-      if (resData && successSnackbar){
+      if (resData && successSnackbar) {
         playSuccessSnackbar(successSnackbar)
       }
     })
@@ -87,11 +90,17 @@ const middleware = ({ dispatch }) => next => action => {
         if (error) {
           dispatch(error())
         }
+        else {
+          playErrorSnackbar(costumMessage)
+        }
+      }
+      else if (err === 'register') {
+        playErrorSnackbar(costumMessage2)
       }
       else {
-        playErrorSnackbar()
+        playErrorSnackbar(costumMessage)
       }
-      if (withLoading) { 
+      if (withLoading) {
         dispatch(setLoadingFalse())
       }
     })
