@@ -38,10 +38,10 @@ module.exports = async (req, res, next) => {
     await newUser.setPassword(password)
     await newUser.save()
 
-    next()
+    return next()
   } catch (e) {
     logger.info('request to create a user has failed')
-    res.status(400).json({
+    return res.status(400).json({
       success: false,
       error: e,
       message: 'create user failed',
