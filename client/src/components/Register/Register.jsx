@@ -4,8 +4,6 @@ import {
   Button,
   CssBaseline,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Typography,
   Container,
   InputLabel,
@@ -25,9 +23,9 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { useHistory } from 'react-router-dom'
 
-import { login, resetLoginError } from '../../actions'
-//TODO: Create registration page
-//TODO: Make return submit when possbile
+import { playErrorSnackbar } from '../../middleware/api'
+import { register } from '../../actions'
+
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -48,15 +46,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function Login(props) {
+function Register(props) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [passwordAgain, setPasswordAgain] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const {
-    onLogin,
+    onRegister,
     isLoggedIn,
-    loginError,
-    onResetLoginError,
     isLight,
   } = props
   const classes = useStyles()
@@ -68,7 +65,8 @@ function Login(props) {
   const history = useHistory()
 
   const handleSubmit = () => {
-    onLogin({ email, password })
+    if (passwordAgain === password) onRegister({ email, password })
+    else playErrorSnackbar(`Password's must match`)
   }
 
   if (isLoggedIn) return <Redirect to={from} />
@@ -81,11 +79,10 @@ function Login(props) {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign Up
           </Typography>
           <TextField
             inputProps={{ style: inputStyle }}
-            error={loginError}
             variant="outlined"
             margin="normal"
             required
@@ -96,20 +93,33 @@ function Login(props) {
             autoComplete="email"
             autoFocus
             value={email}
-            onFocus={() => onResetLoginError()}
             onChange={(e) => { setEmail(e.target.value) }}
           />
+          <TextField
+            inputProps={{ style: inputStyle }}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type={showPassword ? 'text' : 'password'}
+            id="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={(e) => { setPassword(e.target.value) }}
+          />
           <FormControl style={{ marginTop: 10 }} fullWidth variant="outlined" >
-            <InputLabel htmlFor="outlined-adornment-password">Password *</InputLabel>
+            <InputLabel htmlFor="outlined-adornment-password">Enter Password Again*</InputLabel>
             <OutlinedInput
               inputProps={{ style: inputStyle }}
               id="outlined-adornment-password"
               type={showPassword ? 'text' : 'password'}
-              value={password}
+              value={passwordAgain}
               fullWidth
               required
-              label="Password"
-              onChange={(e) => { setPassword(e.target.value) }}
+              label="Enter Password Again"
+              onChange={(e) => { setPasswordAgain(e.target.value) }}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -126,24 +136,20 @@ function Login(props) {
               }
             />
           </FormControl>
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Keep me logged in"
-          />
           <Button
             fullWidth
-            disabled={!(email && password)}
+            disabled={!(email && password && passwordAgain)}
             variant="contained"
             color="primary"
             className={classes.submit}
             onClick={handleSubmit}
           >
-            Sign In
+            Sign Up
           </Button>
           <Grid container justify="center" >
             <Grid item>
-              <Link role="button" onClick={() => history.push('/register')}>
-                Dont have an account? Sign Up
+              <Link role="button" onClick={() => history.push('/login')}>
+                Already have an account? Sign In
               </Link>
             </Grid>
           </Grid>
@@ -155,16 +161,14 @@ function Login(props) {
 
 const mapStateToProps = ({ ui, general }) => ({
   isLoggedIn: ui.isLoggedIn,
-  loginError: ui.loginError,
   isLight: general.isLight,
 })
 
 const mapActionsToProps = dispatch => ({
-  onLogin: bindActionCreators(login, dispatch),
-  onResetLoginError: bindActionCreators(resetLoginError, dispatch),
+  onRegister: bindActionCreators(register, dispatch),
 })
 
 export default (connect(
   mapStateToProps,
   mapActionsToProps,
-)(Login))
+)(Register))

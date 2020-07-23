@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense, lazy } from 'react'
+import React, { useEffect, useState, Suspense, lazy } from 'react'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import { withSnackbar } from 'notistack'
@@ -12,11 +12,23 @@ import Main from './Main/Main'
 import Header from './Header'
 import Logs from './Logs/Logs'
 import Log from './Logs/Log'
+import Incompatible from './NotFound/Incompatible'
+import Register from './Register/Register'
+
 const Login = lazy(() => import('./Login/Login'))
 
 function AppRouter(props) {
+  const calcWindowCompatibility = () => window.innerHeight < 636 || window.innerWidth > window.innerHeight
+  const [isWindowIncompatible, setisWindowIncompatible] = useState(calcWindowCompatibility())
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight)
 
   useEffect(() => {
+    function handleResize() {
+      setisWindowIncompatible(calcWindowCompatibility())
+      setWindowHeight(window.innerHeight)
+    }
+    window.addEventListener('resize', handleResize)
+
     if (!props.isLoggedIn) {
       props.getUserData()
     }
@@ -30,15 +42,17 @@ function AppRouter(props) {
 
   return (
     <Router>
-      <Suspense fallback={<LegoLoading open={true} />}>
+      {isWindowIncompatible && (<Incompatible windowHeight={windowHeight} />)}
+      {!isWindowIncompatible && (<Suspense fallback={<LegoLoading open={true} />}>
         <Header />
         <Route exact path='/' render={() => (isLoggedIn ? <Redirect to={`/main`} /> : <Redirect to={`/login`} />)} />
         <Route exact path='/login' component={Login} />
+        <Route exact path='/register' component={Register} />
         <PrivateRoute path='/main' isLoggedIn={isLoggedIn} component={Main} />
         <PrivateRoute exact path='/logs' isLoggedIn={isLoggedIn} component={Logs} />
         <PrivateRoute path='/logs/:id' isLoggedIn={isLoggedIn} component={Log} />
         <LegoLoading open={isLoading} />
-      </Suspense>
+      </Suspense>)}
     </Router>
   )
 }

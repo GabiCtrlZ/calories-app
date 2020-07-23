@@ -35,6 +35,22 @@ export const login = ({ email, password }) => ({
   },
 })
 
+export const register = ({ email, password }) => ({
+  type: API,
+  payload: {
+    url: '/users/register',
+    method: 'POST',
+    data: {
+      email,
+      password,
+    },
+    success: payload => setUserData(payload),
+    withLoading: true,
+    costumMessage: 'Oops! seems like this email is taken!',
+    costumMessage2: 'Password must be at least 1 upper case letter, 1 lower case, 1 number and 8 charcters',
+  },
+})
+
 export const getUserData = () => ({
   type: API,
   payload: {
