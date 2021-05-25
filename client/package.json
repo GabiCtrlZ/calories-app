@@ -13,7 +13,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "darkreader": "^4.9.1",
-    "date-fns": "^2.11.0",
+    "date-fns": "^2.21.1",
     "history": "^5.0.0",
     "notistack": "^0.9.9",
     "rc-progress": "^3.0.0",
