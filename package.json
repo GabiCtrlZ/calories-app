@@ -39,7 +39,7 @@
     "graphql": "^14.6.0",
     "jsonwebtoken": "^8.5.1",
     "log4js": "^6.3.0",
-    "mongoose": "^5.9.4",
+    "mongoose": "^5.12.7",
     "node-rsa": "^1.0.7",
     "passport-local-mongoose": "^6.0.1"
   },
