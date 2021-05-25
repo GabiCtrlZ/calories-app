@@ -12,7 +12,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
-    "darkreader": "^4.9.1",
+    "darkreader": "^4.9.32",
     "date-fns": "^2.11.0",
     "history": "^5.0.0",
     "notistack": "^0.9.9",
